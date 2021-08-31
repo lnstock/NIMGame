@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 namespace NIMGame
 {
     /// <summary>
-    /// 表示机器人玩家
+    /// 机器人玩家控制器
     /// </summary>
-    public class RobotPlayer : PlayerBase
+    public class RobotPlayerController : IPlayerController
     {
         private readonly IReadOnlyList<int> _itemPool;
         private readonly Random _takeRandom = new Random();
 
-        public RobotPlayer(string name, IReadOnlyList<int> itemPool) : base(name)
+        public RobotPlayerController(IReadOnlyList<int> itemPool)
         {
             _itemPool = itemPool;
         }
 
-        public override TakeRule Take()
+        public TakeRule Take(IPlayer player)
         {
             // 随机一个物品不为 0 的行数
             var rows = _itemPool

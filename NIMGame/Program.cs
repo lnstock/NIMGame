@@ -17,14 +17,15 @@ namespace NIMGame
             var gameService = new GameService(itemPool);
 
             // 添加游戏玩家
-            gameService.Players.Add(new ConsolePlayer("玩家一"));
-            gameService.Players.Add(new RobotPlayer("玩家二", itemPool));
+            gameService.Players.Add(new Player("玩家一", new ConsolePlayerController()));
+            gameService.Players.Add(new Player("玩家二", new RobotPlayerController(itemPool)));
 
             try
             {
                 // 游戏开始
                 gameService.Start();
 
+                Console.WriteLine();
                 Console.WriteLine($"游戏结束，输者为：{gameService.Loser.Name}");
             }
             catch (Exception ex)

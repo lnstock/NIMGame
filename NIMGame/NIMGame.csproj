@@ -42,15 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsolePlayerController.cs" />
+    <Compile Include="IPlayerController.cs" />
     <Compile Include="ItemPool.cs" />
-    <Compile Include="ConsolePlayer.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="GameException.cs" />
-    <Compile Include="PlayerBase.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RobotPlayer.cs" />
+    <Compile Include="RobotPlayerController.cs" />
     <Compile Include="TakeRule.cs" />
   </ItemGroup>
   <ItemGroup>
