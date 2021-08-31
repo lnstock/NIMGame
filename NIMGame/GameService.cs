@@ -23,7 +23,7 @@ namespace NIMGame
         /// <summary>
         /// 玩家列表
         /// </summary>
-        public ICollection<PlayerBase> Players { get; } = new HashSet<PlayerBase>();
+        public ICollection<IPlayer> Players { get; } = new HashSet<IPlayer>();
 
         /// <summary>
         /// 物品池
@@ -33,18 +33,18 @@ namespace NIMGame
         /// <summary>
         /// 输家
         /// </summary>
-        public PlayerBase Loser { get; private set; }
+        public IPlayer Loser { get; private set; }
 
         public void Start()
         {
             if (Players.Count < 2)
                 throw new GameException($"{nameof(Players)} 数量不能少于 2");
 
-            // i 表示当前第几轮
-            for (int i = 0; ; i++)
+            // round 表示当前第几轮
+            for (int round = 0; ; round++)
             {
                 Console.WriteLine(new string('*', 50));
-                Console.WriteLine($"第 {i + 1} 轮开始");
+                Console.WriteLine($"第 {round + 1} 轮开始");
                 Console.WriteLine(new string('*', 50));
 
                 // 依次由所有玩家进行取物
