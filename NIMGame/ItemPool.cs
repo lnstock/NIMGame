@@ -13,6 +13,7 @@ namespace NIMGame
     public class ItemPool : IReadOnlyList<int>
     {
         private readonly List<int> _pool;
+        private readonly object _takeLock = new object();
 
         /// <summary>
         /// 
@@ -21,7 +22,7 @@ namespace NIMGame
         /// <example>new ItemPool(1,3,4) 表示第1行1个，第2行3个，第3行4个</example>
         public ItemPool(params int[] numbers)
         {
-            if (numbers.Length == 0 || numbers.Any(x => x <= 0))
+            if (numbers.Length == 0 || numbers.Any(x => x < 1))
                 throw new ArgumentOutOfRangeException(nameof(numbers), "物品数量必须大于 0");
 
             _pool = new List<int>(numbers);
@@ -33,16 +34,19 @@ namespace NIMGame
         /// <param name="rule">取走规则</param>
         public void Take(TakeRule rule)
         {
-            if (rule.Row < 1 || rule.Row > _pool.Count)
-                throw new GameException($"行数必须在 {1}-{_pool.Count} 之间");
+            lock (_takeLock)
+            {
+                if (rule.Row < 0 || rule.Row >= _pool.Count)
+                    throw new GameException($"行数必须在 {0}-{_pool.Count - 1} 之间");
 
-            if (rule.Counts < 1)
-                throw new GameException("数量必须大于 0");
+                if (rule.Counts < 1)
+                    throw new GameException("数量必须大于 0");
 
-            if (_pool[rule.Row - 1] < rule.Counts)
-                throw new GameException("指定行的数量不足");
+                if (_pool[rule.Row] < rule.Counts)
+                    throw new GameException("指定行的数量不足");
 
-            _pool[rule.Row - 1] -= rule.Counts;
+                _pool[rule.Row] -= rule.Counts;
+            }
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace NIMGame
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="row">行数，1 表示第一行</param>
+        /// <param name="row">行数，0 表示第一行</param>
         /// <param name="counts">数量</param>
         public TakeRule(int row, int counts)
         {
@@ -23,7 +23,7 @@ namespace NIMGame
         }
 
         /// <summary>
-        /// 行数，1 表示第一行
+        /// 行数，0 表示第一行
         /// </summary>
         public int Row { get;  private set; }
 

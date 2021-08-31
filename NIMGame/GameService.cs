@@ -50,6 +50,12 @@ namespace NIMGame
                 // 依次由所有玩家进行取物
                 foreach (var player in Players)
                 {
+                    Console.WriteLine($"现在由玩家【{player.Name}】开始取物，物品池如下");
+                    for (int row = 0; row < ItemPool.Count; row++)
+                    {
+                        Console.WriteLine($"第 {row + 1} 行：{ItemPool[row]}");
+                    }
+
                     // 判断物品池只剩下最后一行的最后一个，则可直接判定当前玩家为输
                     if (ItemPool.Sum() == 1)
                     {
@@ -57,13 +63,7 @@ namespace NIMGame
                         return;
                     }
 
-                    Console.WriteLine($"现在由玩家【{player.Name}】开始取物，物品池如下");
-                    for (int row = 0; row < ItemPool.Count; row++)
-                    {
-                        Console.WriteLine($"第 {row + 1} 行：{ItemPool[row]}");
-                    }
-
-                    // 这个 while 的作用在与确保玩家取走的物件在正确取值范围内
+                    // 这个 while 的作用在与确保玩家取走的物品在正确取值范围内
                     while (true)
                     {
                         try

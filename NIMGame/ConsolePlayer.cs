@@ -33,7 +33,7 @@ namespace NIMGame
         {
             var match = _ruleRegex.Match(line);
             if (match.Success)
-                return new TakeRule(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
+                return new TakeRule(int.Parse(match.Groups[1].Value) - 1, int.Parse(match.Groups[2].Value));
 
             throw new GameException("输入条件不复合规则，请重新输入");
         }
